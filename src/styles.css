@@ -1,4 +1,16 @@
 .App {
   font-family: sans-serif;
-  text-align: center;
+  display: flex;
+  padding: 10px;
+}
+
+.wrapper {
+  padding: 20px;
+  line-height: 30px;
+}
+
+.flex {
+  width: 350px;
+  display: flex;
+  justify-content: space-evenly;
 }

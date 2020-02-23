@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import { TextInput } from "./components/text-input";
+import { TextInput } from "./components/text-input-no-refresh";
 
 import "./styles.css";
 
+const generateRandomValue = () => Math.floor(Math.random() * 10000);
+
 export default function App() {
-  const [inputUpdatedValue, setInputUpdatedValue] = useState("");
-  const [randomInputValue, setRandomInputValue] = useState(Math.random());
+  const initialValue = generateRandomValue();
+
+  const [inputUpdatedValue, setInputUpdatedValue] = useState(initialValue);
+  const [randomInputValue, setRandomInputValue] = useState(initialValue);
 
   const handleInputUpdate = value => {
     console.log("handleInputUpdate() value = ", value);
@@ -13,16 +17,36 @@ export default function App() {
   };
 
   const handleButtonClick = () => {
-    setRandomInputValue(Math.random());
+    setRandomInputValue(generateRandomValue());
   };
 
   return (
     <div className="App">
-      <TextInput value={randomInputValue} onUpdate={handleInputUpdate} />
-      <div>Input broadcasted value: {inputUpdatedValue}</div>
+      <div className="wrapper">
+        <h1>No input refresh</h1>
+        <div className="flex">
+          <TextInput value={randomInputValue} onUpdate={handleInputUpdate} />
+          <div>Input updated value: {inputUpdatedValue}</div>
+        </div>
 
-      <div>Button generated value: {randomInputValue}</div>
-      <button onClick={handleButtonClick}>Update value</button>
+        <div className="flex">
+          <button onClick={handleButtonClick}>Update value</button>
+          <div>Button generated value: {randomInputValue}</div>
+        </div>
+      </div>
+
+      <div className="wrapper">
+        <h1>With input refresh</h1>
+        <div className="flex">
+          <TextInput value={randomInputValue} onUpdate={handleInputUpdate} />
+          <div>Input updated value: {inputUpdatedValue}</div>
+        </div>
+
+        <div className="flex">
+          <button onClick={handleButtonClick}>Update value</button>
+          <div>Button generated value: {randomInputValue}</div>
+        </div>
+      </div>
     </div>
   );
 }

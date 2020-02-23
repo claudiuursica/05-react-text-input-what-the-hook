@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useInput } from "../hooks/use-input";
+import { useInput } from "../hooks/use-input-no-refresh";
 
 export const TextInput = ({ value = "", onUpdate }) => {
   const { value: stateValue, onChange: stateStateValue } = useInput(value);
