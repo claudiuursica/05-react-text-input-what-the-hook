@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-export const useInput = val => {
+export const useInputStale = val => {
   const [value, setValue] = useState(val);
 
-  console.log("value = ", value);
+  console.log("useInputStale() value = ", value);
 
   return {
     value,

@@ -1,51 +1,40 @@
 import React, { useState } from "react";
-import { TextInput } from "./components/text-input-no-refresh";
+import { TextInputStale } from "./components/text-input-stale";
+import { TextInput } from "./components/text-input";
 
 import "./styles.css";
 
 const generateRandomValue = () => Math.floor(Math.random() * 10000);
 
 export default function App() {
-  const initialValue = generateRandomValue();
+  const [staleInputValue, setStaleInputValue] = useState(generateRandomValue());
+  const [inputValue, setInputValue] = useState(generateRandomValue());
 
-  const [inputUpdatedValue, setInputUpdatedValue] = useState(initialValue);
-  const [randomInputValue, setRandomInputValue] = useState(initialValue);
+  const handleStaleInputUpdate = value => setStaleInputValue(value);
+  const handleStaleButtonClick = () =>
+    setStaleInputValue(generateRandomValue());
 
-  const handleInputUpdate = value => {
-    console.log("handleInputUpdate() value = ", value);
-    setInputUpdatedValue(value);
-  };
-
-  const handleButtonClick = () => {
-    setRandomInputValue(generateRandomValue());
-  };
+  const handleInputUpdate = value => setStaleInputValue(value);
+  const handleButtonClick = () => setInputValue(generateRandomValue());
 
   return (
     <div className="App">
       <div className="wrapper">
-        <h1>No input refresh</h1>
-        <div className="flex">
-          <TextInput value={randomInputValue} onUpdate={handleInputUpdate} />
-          <div>Input updated value: {inputUpdatedValue}</div>
-        </div>
+        <h1>Stale input no refresh</h1>
+        <div>Parent state value: {staleInputValue}</div>
+        <TextInputStale
+          value={staleInputValue}
+          onUpdate={handleStaleInputUpdate}
+        />
 
-        <div className="flex">
-          <button onClick={handleButtonClick}>Update value</button>
-          <div>Button generated value: {randomInputValue}</div>
-        </div>
+        <button onClick={handleStaleButtonClick}>Update value</button>
       </div>
 
       <div className="wrapper">
-        <h1>With input refresh</h1>
-        <div className="flex">
-          <TextInput value={randomInputValue} onUpdate={handleInputUpdate} />
-          <div>Input updated value: {inputUpdatedValue}</div>
-        </div>
-
-        <div className="flex">
-          <button onClick={handleButtonClick}>Update value</button>
-          <div>Button generated value: {randomInputValue}</div>
-        </div>
+        <h1>Input with refresh</h1>
+        <div>Parent state value: {inputValue}</div>
+        <TextInput value={inputValue} onUpdate={handleInputUpdate} />
+        <button onClick={handleButtonClick}>Update value</button>
       </div>
     </div>
   );
