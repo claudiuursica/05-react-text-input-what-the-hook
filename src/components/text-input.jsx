@@ -1,5 +1,4 @@
 import React from "react";
-
 import { useInput } from "../hooks/use-input";
 
 export const TextInput = ({ value = "", onUpdate }) => {
@@ -8,12 +7,10 @@ export const TextInput = ({ value = "", onUpdate }) => {
   const handleInputKeyPressed = event => {
     const { key } = event;
     if (key === "Enter") {
-      console.log("TextInput() broadcasting value = ", stateValue);
       onUpdate(stateValue);
     }
   };
 
-  console.log("TextInput() rendering stateValue = ", stateValue);
   return (
     <input
       type="text"

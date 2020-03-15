@@ -5,8 +5,6 @@ export const useInput = val => {
 
   useEffect(() => setValue(val), [val]);
 
-  console.log("useInput() value = ", value);
-
   return {
     value,
     setValue,
